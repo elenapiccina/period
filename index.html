@@ -122,7 +122,7 @@
 
       <button id="quickLogBtn" onclick="toggleQuickPeriodToday()" class="text-[8.5px] font-sans font-normal tracking-[0.15em] uppercase px-3 py-1 bg-roseaccent text-white rounded-full hover:bg-rosedeep transition shadow-2xs flex items-center gap-1">
         <span id="quickLogIcon">🌸</span>
-        <span id="quickLogLabel">LOG PERIOD DAY 1</span>
+        <span id="quickLogLabel">LOG PERIOD TODAY</span>
       </button>
     </div>
   </header>
@@ -151,12 +151,12 @@
     </div>
 
     <div class="bg-white/90 border border-rosemuted px-2.5 py-1.5 rounded-xl flex flex-col justify-between shadow-2xs">
-      <span class="text-[8px] font-sans font-light tracking-[0.15em] text-mulberry/70 uppercase">Period Window</span>
+      <span class="text-[8px] font-sans font-light tracking-[0.15em] text-mulberry/70 uppercase">Last Period Window</span>
       <span id="metricPeriodDates" class="text-[10px] font-sans font-normal text-mulberry mt-0.5 truncate">Nov 1 - Nov 5</span>
     </div>
   </section>
 
-  <!-- Accordion Rollout Stack -->
+  <!-- Accordion Stack -->
   <section class="space-y-2">
 
     <!-- SECTION 1: 🌸 OVERVIEW & RING -->
@@ -234,130 +234,14 @@
       </div>
     </div>
 
-    <!-- SECTION 2: 🩸 COMPACT DAILY LOGGER -->
-    <div class="bg-white border border-rosemuted rounded-xl overflow-hidden shadow-2xs">
-      <div class="px-3 py-2 flex items-center justify-between cursor-pointer bg-blushlight text-mulberry hover:bg-rosemuted/30 transition-colors"
-           onclick="toggleRollout('sec-log')">
-        <div class="flex items-center gap-1.5">
-          <span class="text-xs">🩸</span>
-          <h2 class="font-section-title text-base sm:text-lg font-bold tracking-tight text-mulberry">
-            Log Period & Notes
-          </h2>
-        </div>
-        <div class="flex items-center gap-1.5">
-          <span id="logStatusBadge" class="text-[8.5px] font-sans font-normal px-2 py-0.5 rounded-full bg-white border border-rosemuted text-mulberry">
-            SELECT DATE
-          </span>
-          <button class="text-mulberry text-[10px] focus:outline-none">
-            <span id="chevron-sec-log" class="inline-block chevron-icon">▼</span>
-          </button>
-        </div>
-      </div>
-
-      <div class="rollout-content" id="rollout-sec-log">
-        <div class="rollout-inner p-3 bg-petal space-y-2.5">
-          <form id="dailyLogForm" onsubmit="handleSaveLog(event)" class="space-y-2.5">
-            
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 bg-white p-2.5 rounded-lg border border-rosemuted/60">
-              <div>
-                <label class="block text-[8px] font-sans font-light tracking-[0.15em] uppercase text-mulberry/70">SELECT DATE</label>
-                <input type="date" id="logDateInput" required onchange="loadLogForSelectedDate()"
-                       class="mt-0.5 bg-cream border border-rosemuted rounded-md px-2 py-1 font-sans text-xs text-mulberry focus:outline-none focus:border-roseaccent">
-              </div>
-              <div class="flex items-center gap-1.5 flex-wrap">
-                <button type="button" onclick="setLogDateToday()" class="text-[8.5px] font-sans font-normal uppercase tracking-wider px-2.5 py-1 bg-blushlight border border-rosemuted rounded-full hover:bg-rosemuted/40">
-                  Set to Today
-                </button>
-                <button type="button" onclick="clearLogForSelectedDate()" class="text-[8.5px] font-sans font-normal uppercase tracking-wider px-2.5 py-1 bg-red-50 text-red-600 border border-red-200 rounded-full hover:bg-red-100">
-                  🧹 Clear Date Log
-                </button>
-              </div>
-            </div>
-
-            <!-- Flow Selector -->
-            <div class="bg-white p-2.5 rounded-lg border border-rosemuted/60 space-y-1">
-              <label class="block text-[8px] font-sans font-light tracking-[0.15em] uppercase text-mulberry/70">PERIOD FLOW INTENSITY</label>
-              <div class="grid grid-cols-5 gap-1">
-                <button type="button" onclick="selectFlow('None')" class="flow-btn py-1 rounded-md text-[11px] font-sans font-light border border-rosemuted/50 text-center hover:bg-blushlight" data-flow="None">None</button>
-                <button type="button" onclick="selectFlow('Spotting')" class="flow-btn py-1 rounded-md text-[11px] font-sans font-light border border-rosemuted/50 text-center hover:bg-blushlight" data-flow="Spotting">Spotting</button>
-                <button type="button" onclick="selectFlow('Light')" class="flow-btn py-1 rounded-md text-[11px] font-sans font-light border border-rosemuted/50 text-center hover:bg-blushlight" data-flow="Light">Light</button>
-                <button type="button" onclick="selectFlow('Medium')" class="flow-btn py-1 rounded-md text-[11px] font-sans font-light border border-rosemuted/50 text-center hover:bg-blushlight" data-flow="Medium">Medium</button>
-                <button type="button" onclick="selectFlow('Heavy')" class="flow-btn py-1 rounded-md text-[11px] font-sans font-light border border-rosemuted/50 text-center hover:bg-blushlight" data-flow="Heavy">Heavy</button>
-              </div>
-              <input type="hidden" id="selectedFlow" value="None">
-            </div>
-
-            <!-- Mood & Notes -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-              <div class="bg-white p-2.5 rounded-lg border border-rosemuted/60 space-y-1">
-                <label class="block text-[8px] font-sans font-light tracking-[0.15em] uppercase text-mulberry/70">MOOD & MINDSET</label>
-                <select id="logMood" class="w-full bg-cream border border-rosemuted rounded-md px-2 py-1 text-xs font-sans font-light text-mulberry focus:outline-none">
-                  <option value="Calm & Balanced">Calm & Balanced</option>
-                  <option value="High Energy">High Energy</option>
-                  <option value="Sensitive">Sensitive</option>
-                  <option value="Crampy & Low">Crampy & Low</option>
-                  <option value="Irritable">Irritable</option>
-                  <option value="Anxious">Anxious</option>
-                </select>
-              </div>
-
-              <div class="bg-white p-2.5 rounded-lg border border-rosemuted/60 space-y-1">
-                <label class="block text-[8px] font-sans font-light tracking-[0.15em] uppercase text-mulberry/70">NOTES & REFLECTIONS</label>
-                <input type="text" id="logNotes" placeholder="e.g. Drank chamomile tea..." 
-                       class="w-full bg-cream border border-rosemuted rounded-md px-2.5 py-1 text-xs font-sans font-light text-mulberry focus:outline-none">
-              </div>
-            </div>
-
-            <div class="flex items-center justify-between pt-0.5">
-              <button type="button" onclick="clearLogForSelectedDate()" class="text-[8.5px] font-sans font-light text-mulberry/60 hover:text-red-600 underline">
-                Un-log this date completely
-              </button>
-
-              <button type="submit" class="px-4 py-1.5 bg-roseaccent text-white rounded-full text-[8.5px] font-sans font-normal tracking-[0.15em] uppercase hover:bg-rosedeep transition shadow-2xs">
-                Save Log Entry
-              </button>
-            </div>
-
-          </form>
-        </div>
-      </div>
-    </div>
-
-    <!-- SECTION 3: 📊 PERIOD HISTORY -->
-    <div class="bg-white border border-rosemuted rounded-xl overflow-hidden shadow-2xs">
-      <div class="px-3 py-2 flex items-center justify-between cursor-pointer bg-blushlight text-mulberry hover:bg-rosemuted/30 transition-colors"
-           onclick="toggleRollout('sec-history')">
-        <div class="flex items-center gap-1.5">
-          <span class="text-xs">📊</span>
-          <h2 class="font-section-title text-base sm:text-lg font-bold tracking-tight text-mulberry">
-            Period History & Logs
-          </h2>
-        </div>
-        <div class="flex items-center gap-1.5">
-          <span id="historyCountBadge" class="text-[8.5px] font-sans font-normal px-2 py-0.5 rounded-full bg-mulberry text-white">
-            0 Logs
-          </span>
-          <button class="text-mulberry text-[10px] focus:outline-none">
-            <span id="chevron-sec-history" class="inline-block chevron-icon">▼</span>
-          </button>
-        </div>
-      </div>
-
-      <div class="rollout-content" id="rollout-sec-history">
-        <div class="rollout-inner p-3 bg-petal space-y-2">
-          <div id="historyLogsContainer" class="space-y-1.5"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- SECTION 4: ⚙️ WORKING SETTINGS FORM -->
+    <!-- SECTION 2: ⚙️ PERIOD DATES LOGGER & SETTINGS -->
     <div class="bg-white border border-rosemuted rounded-xl overflow-hidden shadow-2xs">
       <div class="px-3 py-2 flex items-center justify-between cursor-pointer bg-blushlight text-mulberry hover:bg-rosemuted/30 transition-colors"
            onclick="toggleRollout('sec-settings')">
         <div class="flex items-center gap-1.5">
           <span class="text-xs">⚙️</span>
           <h2 class="font-section-title text-base sm:text-lg font-bold tracking-tight text-mulberry">
-            Cycle Settings & Date Modifiers
+            Log Period Dates & Cycle Settings
           </h2>
         </div>
         <div class="flex items-center gap-1.5">
@@ -365,25 +249,25 @@
             25-DAY DEFAULT
           </span>
           <button class="text-mulberry text-[10px] focus:outline-none">
-            <span id="chevron-sec-settings" class="inline-block chevron-icon">▼</span>
+            <span id="chevron-sec-settings" class="inline-block chevron-icon rotated">▲</span>
           </button>
         </div>
       </div>
 
-      <div class="rollout-content" id="rollout-sec-settings">
+      <div class="rollout-content expanded" id="rollout-sec-settings">
         <div class="rollout-inner p-3 bg-petal space-y-3">
           
           <form id="cycleSettingsForm" onsubmit="handleSaveSettings(event)" class="space-y-2.5">
             
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
               <div class="bg-white p-2.5 rounded-lg border border-rosemuted/60 space-y-1">
-                <label class="block text-[8px] font-sans font-light tracking-[0.15em] uppercase text-mulberry/70">LAST PERIOD START DATE *</label>
+                <label class="block text-[8px] font-sans font-light tracking-[0.15em] uppercase text-mulberry/70">PERIOD START DATE *</label>
                 <input type="date" id="settingStartDate" required onchange="handleStartDateChange()"
                        class="w-full bg-cream border border-rosemuted rounded-md px-2 py-1 text-xs font-sans font-light text-mulberry focus:outline-none focus:border-roseaccent">
               </div>
 
               <div class="bg-white p-2.5 rounded-lg border border-rosemuted/60 space-y-1">
-                <label class="block text-[8px] font-sans font-light tracking-[0.15em] uppercase text-mulberry/70">LAST PERIOD END DATE *</label>
+                <label class="block text-[8px] font-sans font-light tracking-[0.15em] uppercase text-mulberry/70">PERIOD END DATE *</label>
                 <input type="date" id="settingEndDate" required onchange="handleEndDateChange()"
                        class="w-full bg-cream border border-rosemuted rounded-md px-2 py-1 text-xs font-sans font-light text-mulberry focus:outline-none focus:border-roseaccent">
               </div>
@@ -405,11 +289,11 @@
 
             <div class="flex flex-col sm:flex-row items-center justify-between gap-2 pt-1 border-t border-rosemuted/40">
               <button type="button" onclick="resetAllData()" class="text-[8.5px] font-sans font-light text-red-600 border border-red-200 px-2.5 py-1 rounded-full hover:bg-red-50">
-                ⚠️ Reset All Cycle Data
+                ⚠️ Clear History & Reset Data
               </button>
 
-              <button type="submit" class="px-4 py-1.5 bg-mulberry text-white rounded-full text-[8.5px] font-sans font-normal tracking-[0.15em] uppercase hover:bg-roseaccent transition shadow-2xs">
-                Save Settings & Dates
+              <button type="submit" class="px-5 py-1.5 bg-roseaccent text-white rounded-full text-[8.5px] font-sans font-normal tracking-[0.15em] uppercase hover:bg-rosedeep transition shadow-2xs">
+                Save & Log Period Dates
               </button>
             </div>
 
@@ -418,18 +302,45 @@
       </div>
     </div>
 
+    <!-- SECTION 3: 📊 PERIOD HISTORY LOG LIST -->
+    <div class="bg-white border border-rosemuted rounded-xl overflow-hidden shadow-2xs">
+      <div class="px-3 py-2 flex items-center justify-between cursor-pointer bg-blushlight text-mulberry hover:bg-rosemuted/30 transition-colors"
+           onclick="toggleRollout('sec-history')">
+        <div class="flex items-center gap-1.5">
+          <span class="text-xs">📊</span>
+          <h2 class="font-section-title text-base sm:text-lg font-bold tracking-tight text-mulberry">
+            Saved Period History
+          </h2>
+        </div>
+        <div class="flex items-center gap-1.5">
+          <span id="historyCountBadge" class="text-[8.5px] font-sans font-normal px-2 py-0.5 rounded-full bg-mulberry text-white">
+            0 Periods Logged
+          </span>
+          <button class="text-mulberry text-[10px] focus:outline-none">
+            <span id="chevron-sec-history" class="inline-block chevron-icon">▼</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="rollout-content" id="rollout-sec-history">
+        <div class="rollout-inner p-3 bg-petal space-y-2">
+          <div id="historyLogsContainer" class="space-y-1.5"></div>
+        </div>
+      </div>
+    </div>
+
   </section>
 
   <!-- JavaScript Engine -->
   <script>
-    const STORAGE_KEY = 'THE_PERIOD_EDIT_PINK_LUXURY_V7';
+    const STORAGE_KEY = 'THE_PERIOD_EDIT_PINK_LUXURY_V8';
 
     let state = {
       startDate: '',
       endDate: '',
       cycleLength: 25,
       shiftDays: 0,
-      logs: {}
+      history: [] // Array of { id, startDate, endDate, duration }
     };
 
     function init() {
@@ -442,10 +353,12 @@
         }
       }
 
+      state.history = state.history || [];
+
       if (!state.startDate || !state.endDate) {
         const today = new Date();
         const start = new Date(today);
-        start.setDate(today.getDate() - 10);
+        start.setDate(today.getDate() - 3);
         const end = new Date(start);
         end.setDate(start.getDate() + 4);
 
@@ -453,7 +366,16 @@
         state.endDate = formatDateStr(end);
         state.cycleLength = 25;
         state.shiftDays = 0;
-        state.logs = state.logs || {};
+
+        // Add initial seed history if completely empty
+        if (state.history.length === 0) {
+          state.history.push({
+            id: Date.now().toString(),
+            startDate: state.startDate,
+            endDate: state.endDate,
+            duration: 5
+          });
+        }
 
         saveState();
       }
@@ -461,7 +383,6 @@
       const dateOpts = { month: 'long', year: 'numeric' };
       document.getElementById('headerMonthYear').innerText = new Date().toLocaleDateString('en-US', dateOpts).toUpperCase();
 
-      setLogDateToday();
       syncInputs();
       calculateAndRender();
     }
@@ -636,8 +557,6 @@
           heartText.setAttribute('transform', `rotate(90, ${x}, ${y})`);
           heartText.setAttribute('class', 'current-heart');
           heartText.textContent = '💗';
-          
-          heartText.addEventListener('click', () => jumpToLogForDay(i));
           container.appendChild(heartText);
         } else {
           const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
@@ -650,82 +569,8 @@
 
           circle.setAttribute('fill', fillColor);
           circle.setAttribute('class', 'cycle-node');
-
-          circle.addEventListener('click', () => jumpToLogForDay(i));
           container.appendChild(circle);
         }
-      }
-    }
-
-    function jumpToLogForDay(i) {
-      const start = parseDate(state.startDate);
-      const targetDate = new Date(start);
-      targetDate.setDate(start.getDate() + (i - 1));
-      document.getElementById('logDateInput').value = formatDateStr(targetDate);
-      loadLogForSelectedDate();
-
-      const logSection = document.getElementById('rollout-sec-log');
-      if (!logSection.classList.contains('expanded')) {
-        toggleRollout('sec-log');
-      }
-    }
-
-    function selectFlow(flow) {
-      document.getElementById('selectedFlow').value = flow;
-      document.querySelectorAll('.flow-btn').forEach(btn => {
-        if (btn.getAttribute('data-flow') === flow) {
-          btn.className = 'flow-btn py-1 rounded-md text-[11px] font-sans font-medium bg-roseaccent text-white border border-roseaccent text-center shadow-2xs';
-        } else {
-          btn.className = 'flow-btn py-1 rounded-md text-[11px] font-sans font-light border border-rosemuted/50 text-center hover:bg-blushlight text-mulberry';
-        }
-      });
-    }
-
-    function setLogDateToday() {
-      document.getElementById('logDateInput').value = formatDateStr(new Date());
-      loadLogForSelectedDate();
-    }
-
-    function loadLogForSelectedDate() {
-      const dateStr = document.getElementById('logDateInput').value;
-      const log = state.logs[dateStr];
-
-      if (log) {
-        selectFlow(log.flow || 'None');
-        document.getElementById('logMood').value = log.mood || 'Calm & Balanced';
-        document.getElementById('logNotes').value = log.notes || '';
-        document.getElementById('logStatusBadge').innerText = 'LOGGED EDIT';
-        document.getElementById('logStatusBadge').className = 'text-[8.5px] font-sans font-normal px-2 py-0.5 rounded-full bg-roseaccent text-white';
-      } else {
-        selectFlow('None');
-        document.getElementById('logMood').value = 'Calm & Balanced';
-        document.getElementById('logNotes').value = '';
-        document.getElementById('logStatusBadge').innerText = 'NEW EDIT';
-        document.getElementById('logStatusBadge').className = 'text-[8.5px] font-sans font-normal px-2 py-0.5 rounded-full bg-white border border-rosemuted text-mulberry';
-      }
-    }
-
-    function handleSaveLog(e) {
-      e.preventDefault();
-      const dateStr = document.getElementById('logDateInput').value;
-      const flow = document.getElementById('selectedFlow').value;
-      const mood = document.getElementById('logMood').value;
-      const notes = document.getElementById('logNotes').value;
-
-      state.logs[dateStr] = { flow, mood, notes };
-
-      saveState();
-      calculateAndRender();
-      loadLogForSelectedDate();
-    }
-
-    function clearLogForSelectedDate() {
-      const dateStr = document.getElementById('logDateInput').value;
-      if (state.logs[dateStr]) {
-        delete state.logs[dateStr];
-        saveState();
-        calculateAndRender();
-        loadLogForSelectedDate();
       }
     }
 
@@ -733,58 +578,42 @@
       const container = document.getElementById('historyLogsContainer');
       container.innerHTML = '';
 
-      const dates = Object.keys(state.logs).sort((a, b) => new Date(b) - new Date(a));
-      document.getElementById('historyCountBadge').innerText = `${dates.length} Logs`;
+      const logs = [...state.history].sort((a, b) => new Date(b.startDate) - new Date(a.startDate));
+      document.getElementById('historyCountBadge').innerText = `${logs.length} Logged Period(s)`;
 
-      if (dates.length === 0) {
+      if (logs.length === 0) {
         container.innerHTML = `
           <div class="text-center py-4 text-[11px] font-sans font-light text-mulberry/60">
-            No cycle logs recorded yet.
+            No past period dates saved yet.
           </div>
         `;
         return;
       }
 
-      dates.forEach(dateStr => {
-        const log = state.logs[dateStr];
-        const item = document.createElement('div');
-        item.className = 'bg-white p-2 rounded-lg border border-rosemuted/60 flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 shadow-2xs';
+      logs.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'bg-white p-2.5 rounded-lg border border-rosemuted/60 flex items-center justify-between shadow-2xs';
 
-        const formattedDate = parseDate(dateStr).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        const startStr = parseDate(item.startDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        const endStr = parseDate(item.endDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 
-        item.innerHTML = `
-          <div class="space-y-0.5">
-            <div class="flex items-center gap-1.5">
-              <span class="text-[11px] font-section-title font-bold text-mulberry">${formattedDate}</span>
-              <span class="text-[8.5px] font-sans font-normal px-1.5 py-0.5 rounded-full bg-blushlight text-rosedeep border border-rosemuted/40">${log.flow} Flow</span>
-              <span class="text-[8.5px] font-sans font-light text-mulberry/70">${log.mood}</span>
-            </div>
-            ${log.notes ? `<div class="text-[10px] font-sans font-light text-mulberry/80">"${log.notes}"</div>` : ''}
+        card.innerHTML = `
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-section-title font-bold text-mulberry">${startStr} — ${endStr}</span>
+            <span class="text-[8.5px] font-sans font-normal px-2 py-0.5 rounded-full bg-blushlight text-rosedeep border border-rosemuted/40">${item.duration} Days Duration</span>
           </div>
-          <div class="flex items-center gap-1 self-end sm:self-center">
-            <button onclick="editLogDate('${dateStr}')" class="text-[8px] font-sans font-normal uppercase px-2 py-0.5 bg-blushlight border border-rosemuted rounded-md hover:bg-rosemuted/40">Edit</button>
-            <button onclick="deleteLogDate('${dateStr}')" class="text-[8px] font-sans font-normal uppercase px-2 py-0.5 bg-red-50 text-red-600 border border-red-200 rounded-md hover:bg-red-100">Delete</button>
-          </div>
+          <button onclick="deleteHistoryItem('${item.id}')" class="text-[8px] font-sans font-normal uppercase px-2 py-0.5 bg-red-50 text-red-600 border border-red-200 rounded-md hover:bg-red-100">
+            Delete
+          </button>
         `;
-        container.appendChild(item);
+        container.appendChild(card);
       });
     }
 
-    function editLogDate(dateStr) {
-      document.getElementById('logDateInput').value = dateStr;
-      loadLogForSelectedDate();
-      const logSection = document.getElementById('rollout-sec-log');
-      if (!logSection.classList.contains('expanded')) {
-        toggleRollout('sec-log');
-      }
-      window.scrollTo({ top: logSection.offsetTop - 50, behavior: 'smooth' });
-    }
-
-    function deleteLogDate(dateStr) {
-      delete state.logs[dateStr];
+    function deleteHistoryItem(id) {
+      state.history = state.history.filter(item => item.id !== id);
       saveState();
       calculateAndRender();
-      loadLogForSelectedDate();
     }
 
     function setShift(days) {
@@ -806,15 +635,33 @@
       state.endDate = newEnd;
       state.cycleLength = newCycleLen;
 
+      const start = parseDate(newStart);
+      const end = parseDate(newEnd);
+      const duration = Math.max(1, Math.round((end - start) / (1000 * 60 * 60 * 24)) + 1);
+
+      // Check if this date range already exists in history
+      const existing = state.history.find(h => h.startDate === newStart);
+      if (!existing) {
+        state.history.push({
+          id: Date.now().toString(),
+          startDate: newStart,
+          endDate: newEnd,
+          duration: duration
+        });
+      } else {
+        existing.endDate = newEnd;
+        existing.duration = duration;
+      }
+
       saveState();
       syncInputs();
       calculateAndRender();
     }
 
     function resetAllData() {
-      if (confirm('Reset all cycle settings and history logs?')) {
+      if (confirm('Are you sure you want to clear your period history and reset data?')) {
         localStorage.removeItem(STORAGE_KEY);
-        state = { startDate: '', endDate: '', cycleLength: 25, shiftDays: 0, logs: {} };
+        state = { startDate: '', endDate: '', cycleLength: 25, shiftDays: 0, history: [] };
         init();
       }
     }
@@ -827,6 +674,14 @@
       end.setDate(end.getDate() + 4);
       state.endDate = formatDateStr(end);
       state.shiftDays = 0;
+
+      const duration = 5;
+      state.history.push({
+        id: Date.now().toString(),
+        startDate: state.startDate,
+        endDate: state.endDate,
+        duration: duration
+      });
 
       saveState();
       syncInputs();
@@ -841,20 +696,18 @@
       if (chevron) chevron.classList.toggle('rotated');
     }
 
-    let allExpanded = false;
+    let allExpanded = true;
     function toggleExpandAll() {
       allExpanded = !allExpanded;
-      ['sec-overview', 'sec-log', 'sec-history', 'sec-settings'].forEach(id => {
+      ['sec-overview', 'sec-settings', 'sec-history'].forEach(id => {
         const content = document.getElementById(`rollout-${id}`);
         const chevron = document.getElementById(`chevron-${id}`);
         if (allExpanded) {
           content.classList.add('expanded');
           if (chevron) chevron.classList.add('rotated');
         } else {
-          if (id !== 'sec-overview') {
-            content.classList.remove('expanded');
-            if (chevron) chevron.classList.remove('rotated');
-          }
+          content.classList.remove('expanded');
+          if (chevron) chevron.classList.remove('rotated');
         }
       });
       document.getElementById('expandAllBtn').innerText = allExpanded ? '📂 COLLAPSE ALL' : '📂 ROLLOUT ALL';
