@@ -16,7 +16,7 @@
       theme: {
         extend: {
           colors: {
-            cream: '#FDF3F5',
+            cream: '#FFFBF8',
             blushlight: '#FFF0F3',
             mulberry: '#3D2128',
             roseaccent: '#E88299',
@@ -35,7 +35,7 @@
 
   <style>
     :root {
-      --cream: #FDF3F5;
+      --cream: #FFFBF8;
       --mulberry: #3D2128;
       --roseaccent: #E88299;
       --rosemuted: #F2C4CE;
@@ -58,17 +58,9 @@
         radial-gradient(circle at 88% 82%, rgba(232, 130, 153, 0.18) 0%, transparent 45%);
     }
 
-    ::-webkit-scrollbar {
-      width: 4px;
-      height: 4px;
-    }
-    ::-webkit-scrollbar-track {
-      background: #FFF0F3;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #E88299;
-      border-radius: 4px;
-    }
+    ::-webkit-scrollbar { width: 4px; height: 4px; }
+    ::-webkit-scrollbar-track { background: #FFF0F3; }
+    ::-webkit-scrollbar-thumb { background: #E88299; border-radius: 4px; }
 
     .font-section-title {
       font-family: 'Cormorant Garamond', Georgia, serif;
@@ -85,27 +77,14 @@
       grid-template-rows: 1fr;
       opacity: 1;
     }
-    .rollout-inner {
-      overflow: hidden;
-    }
+    .rollout-inner { overflow: hidden; }
 
-    .chevron-icon {
-      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .chevron-icon.rotated {
-      transform: rotate(180deg);
-    }
+    .chevron-icon { transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+    .chevron-icon.rotated { transform: rotate(180deg); }
 
-    /* Cycle Ring Nodes Styling */
-    .cycle-node {
-      transition: all 0.25s ease;
-      cursor: pointer;
-    }
-    .cycle-node:hover {
-      transform: scale(1.3);
-    }
+    .cycle-node { transition: all 0.25s ease; cursor: pointer; }
+    .cycle-node:hover { transform: scale(1.3); }
 
-    /* Bouncing Pink Heart Animation for Current Day */
     .current-heart {
       animation: bounceHeart 1.8s infinite ease-in-out;
       transform-origin: center;
@@ -118,30 +97,30 @@
     }
   </style>
 </head>
-<body class="min-h-screen p-3 sm:p-5 md:p-6 max-w-4xl mx-auto space-y-4">
+<body class="min-h-screen p-2.5 sm:p-4 max-w-3xl mx-auto space-y-3">
 
   <!-- Header Bar -->
-  <header class="border-b border-mulberry/15 pb-3.5 flex flex-col sm:flex-row sm:items-end justify-between gap-3">
+  <header class="border-b border-mulberry/15 pb-2.5 flex flex-col sm:flex-row sm:items-end justify-between gap-2">
     <div>
-      <div class="flex items-center gap-2 text-[9px] font-sans font-light tracking-[0.25em] text-mulberry/70 uppercase mb-1">
+      <div class="flex items-center gap-1.5 text-[8.5px] font-sans font-light tracking-[0.2em] text-mulberry/70 uppercase mb-0.5">
         <span>EDITORIAL CYCLE TRACKER</span>
         <span>•</span>
         <span id="headerMonthYear">NOVEMBER 2026</span>
         <span>•</span>
         <span id="headerCycleBadge">25-DAY CYCLE</span>
       </div>
-      <h1 class="text-3xl sm:text-4xl font-section-title font-semibold tracking-tight text-mulberry leading-none">
+      <h1 class="text-2xl sm:text-3xl font-section-title font-semibold tracking-tight text-mulberry leading-none">
         THE PERIOD & CYCLE EDIT
       </h1>
     </div>
 
     <!-- Quick Actions -->
     <div class="flex items-center gap-2 flex-wrap sm:flex-nowrap justify-between sm:justify-end">
-      <button onclick="toggleExpandAll()" id="expandAllBtn" class="text-[9px] font-sans font-normal tracking-[0.18em] uppercase px-3 py-1.5 border border-mulberry/20 rounded-full bg-white/80 hover:bg-blushlight transition">
+      <button onclick="toggleExpandAll()" id="expandAllBtn" class="text-[8.5px] font-sans font-normal tracking-[0.15em] uppercase px-2.5 py-1 border border-mulberry/20 rounded-full bg-white/80 hover:bg-blushlight transition">
         📂 ROLLOUT ALL
       </button>
 
-      <button id="quickLogBtn" onclick="toggleQuickPeriodToday()" class="text-[9px] font-sans font-normal tracking-[0.18em] uppercase px-3.5 py-1.5 bg-roseaccent text-white rounded-full hover:bg-rosedeep transition shadow-xs flex items-center gap-1.5">
+      <button id="quickLogBtn" onclick="toggleQuickPeriodToday()" class="text-[8.5px] font-sans font-normal tracking-[0.15em] uppercase px-3 py-1 bg-roseaccent text-white rounded-full hover:bg-rosedeep transition shadow-2xs flex items-center gap-1">
         <span id="quickLogIcon">🌸</span>
         <span id="quickLogLabel">LOG PERIOD DAY 1</span>
       </button>
@@ -149,100 +128,100 @@
   </header>
 
   <!-- Metrics Bar -->
-  <section class="grid grid-cols-2 sm:grid-cols-4 gap-2">
-    <div class="bg-white/90 border border-rosemuted px-3 py-2 rounded-xl flex flex-col justify-between shadow-xs">
-      <span class="text-[8.5px] font-sans font-light tracking-[0.2em] text-mulberry/70 uppercase">Current Day</span>
+  <section class="grid grid-cols-2 sm:grid-cols-4 gap-1.5">
+    <div class="bg-white/90 border border-rosemuted px-2.5 py-1.5 rounded-xl flex flex-col justify-between shadow-2xs">
+      <span class="text-[8px] font-sans font-light tracking-[0.15em] text-mulberry/70 uppercase">Current Day</span>
       <div class="flex items-baseline justify-between mt-0.5">
-        <span id="metricCurrentDay" class="text-lg sm:text-xl font-sans font-normal text-mulberry">Day 1</span>
-        <span id="metricTotalCycle" class="text-[9.5px] font-sans font-light text-mulberry/60">/ 25 Days</span>
+        <span id="metricCurrentDay" class="text-base font-sans font-normal text-mulberry">Day 1</span>
+        <span id="metricTotalCycle" class="text-[9px] font-sans font-light text-mulberry/60">/ 25 Days</span>
       </div>
     </div>
 
-    <div class="bg-white/90 border border-rosemuted px-3 py-2 rounded-xl flex flex-col justify-between shadow-xs">
-      <span class="text-[8.5px] font-sans font-light tracking-[0.2em] text-mulberry/70 uppercase">Current Phase</span>
-      <span id="metricCurrentPhase" class="text-base sm:text-lg font-section-title font-bold text-rosedeep truncate mt-0.5">Menstrual</span>
+    <div class="bg-white/90 border border-rosemuted px-2.5 py-1.5 rounded-xl flex flex-col justify-between shadow-2xs">
+      <span class="text-[8px] font-sans font-light tracking-[0.15em] text-mulberry/70 uppercase">Current Phase</span>
+      <span id="metricCurrentPhase" class="text-sm font-section-title font-bold text-rosedeep truncate mt-0.5">Menstrual</span>
     </div>
 
-    <div class="bg-white/90 border border-rosemuted px-3 py-2 rounded-xl flex flex-col justify-between shadow-xs">
-      <span class="text-[8.5px] font-sans font-light tracking-[0.2em] text-mulberry/70 uppercase">Next Period In</span>
-      <span id="metricCountdown" class="text-lg sm:text-xl font-sans font-normal text-mulberry mt-0.5">25 Days</span>
+    <div class="bg-white/90 border border-rosemuted px-2.5 py-1.5 rounded-xl flex flex-col justify-between shadow-2xs">
+      <span class="text-[8px] font-sans font-light tracking-[0.15em] text-mulberry/70 uppercase">Next Period In</span>
+      <span id="metricCountdown" class="text-base font-sans font-normal text-mulberry mt-0.5">25 Days</span>
     </div>
 
-    <div class="bg-white/90 border border-rosemuted px-3 py-2 rounded-xl flex flex-col justify-between shadow-xs">
-      <span class="text-[8.5px] font-sans font-light tracking-[0.2em] text-mulberry/70 uppercase">Active Period Window</span>
-      <span id="metricPeriodDates" class="text-[11px] font-sans font-normal text-mulberry mt-0.5 truncate">Nov 1 - Nov 5</span>
+    <div class="bg-white/90 border border-rosemuted px-2.5 py-1.5 rounded-xl flex flex-col justify-between shadow-2xs">
+      <span class="text-[8px] font-sans font-light tracking-[0.15em] text-mulberry/70 uppercase">Period Window</span>
+      <span id="metricPeriodDates" class="text-[10px] font-sans font-normal text-mulberry mt-0.5 truncate">Nov 1 - Nov 5</span>
     </div>
   </section>
 
   <!-- Accordion Rollout Stack -->
-  <section class="space-y-2.5">
+  <section class="space-y-2">
 
-    <!-- SECTION 1: 🌸 CYCLE OVERVIEW & SHIFT CONTROLS -->
-    <div class="bg-white border border-rosemuted rounded-2xl overflow-hidden shadow-xs">
-      <div class="px-3.5 py-2.5 flex items-center justify-between cursor-pointer bg-blushlight text-mulberry hover:bg-rosemuted/30 transition-colors"
+    <!-- SECTION 1: 🌸 OVERVIEW & RING -->
+    <div class="bg-white border border-rosemuted rounded-xl overflow-hidden shadow-2xs">
+      <div class="px-3 py-2 flex items-center justify-between cursor-pointer bg-blushlight text-mulberry hover:bg-rosemuted/30 transition-colors"
            onclick="toggleRollout('sec-overview')">
-        <div class="flex items-center gap-2">
-          <span class="text-sm">🌸</span>
-          <h2 class="font-section-title text-lg sm:text-xl font-bold tracking-tight text-mulberry">
+        <div class="flex items-center gap-1.5">
+          <span class="text-xs">🌸</span>
+          <h2 class="font-section-title text-base sm:text-lg font-bold tracking-tight text-mulberry">
             Cycle Overview & Shift Predictions
           </h2>
         </div>
-        <div class="flex items-center gap-2">
-          <span id="badgePhase" class="text-[9.5px] font-sans font-normal px-2.5 py-0.5 rounded-full bg-roseaccent text-white uppercase">
+        <div class="flex items-center gap-1.5">
+          <span id="badgePhase" class="text-[8.5px] font-sans font-normal px-2 py-0.5 rounded-full bg-roseaccent text-white uppercase">
             MENSTRUAL PHASE
           </span>
-          <button class="text-mulberry text-xs focus:outline-none">
+          <button class="text-mulberry text-[10px] focus:outline-none">
             <span id="chevron-sec-overview" class="inline-block chevron-icon rotated">▲</span>
           </button>
         </div>
       </div>
 
       <div class="rollout-content expanded" id="rollout-sec-overview">
-        <div class="rollout-inner p-4 bg-petal flex flex-col md:flex-row items-center justify-around gap-6">
+        <div class="rollout-inner p-3 bg-petal flex flex-col md:flex-row items-center justify-around gap-4">
           
-          <!-- SVG Circular Cycle Ring with Bouncing Heart -->
-          <div class="relative w-64 h-64 flex items-center justify-center flex-shrink-0">
+          <!-- SVG Circular Cycle Ring -->
+          <div class="relative w-48 h-48 flex items-center justify-center flex-shrink-0">
             <svg id="cycleRingSvg" class="w-full h-full transform -rotate-90" viewBox="0 0 200 200">
               <circle cx="100" cy="100" r="75" fill="none" stroke="#F2C4CE" stroke-width="2" stroke-dasharray="3 3"/>
               <g id="svgDayNodes"></g>
             </svg>
 
             <!-- Ring Center Text -->
-            <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-4 pointer-events-none">
-              <span class="text-[9px] font-sans font-light tracking-[0.2em] text-mulberry/60 uppercase">CURRENT CYCLE</span>
-              <span id="ringDayText" class="text-2xl font-sans font-normal text-mulberry my-0.5">DAY 1</span>
-              <span id="ringPhaseText" class="text-xs font-section-title font-bold text-rosedeep">Menstrual Phase</span>
-              <span id="ringForecastText" class="text-[9px] font-sans font-light text-mulberry/70 mt-1">Next: Nov 26</span>
+            <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-2 pointer-events-none">
+              <span class="text-[8px] font-sans font-light tracking-[0.18em] text-mulberry/60 uppercase">CURRENT CYCLE</span>
+              <span id="ringDayText" class="text-xl font-sans font-normal text-mulberry my-0.5">DAY 1</span>
+              <span id="ringPhaseText" class="text-[11px] font-section-title font-bold text-rosedeep">Menstrual Phase</span>
+              <span id="ringForecastText" class="text-[8.5px] font-sans font-light text-mulberry/70 mt-0.5">Next: Nov 26</span>
             </div>
           </div>
 
           <!-- Phase Info & Shift Adjusters -->
-          <div class="flex-1 space-y-3 w-full">
+          <div class="flex-1 space-y-2 w-full">
             
             <!-- Shift Controls -->
-            <div class="bg-white border border-rosemuted/60 p-3 rounded-xl shadow-2xs space-y-2">
-              <div class="flex items-center justify-between border-b border-rosemuted/40 pb-1.5">
-                <span class="text-[8.5px] font-sans font-light tracking-[0.2em] uppercase text-mulberry/70">PREDICTED NEXT PERIOD SHIFT</span>
-                <span id="shiftStatusText" class="text-[9.5px] font-sans font-normal text-roseaccent">On Schedule</span>
+            <div class="bg-white border border-rosemuted/60 p-2.5 rounded-lg shadow-2xs space-y-1.5">
+              <div class="flex items-center justify-between border-b border-rosemuted/40 pb-1">
+                <span class="text-[8px] font-sans font-light tracking-[0.15em] uppercase text-mulberry/70">PREDICTED NEXT PERIOD SHIFT</span>
+                <span id="shiftStatusText" class="text-[8.5px] font-sans font-normal text-roseaccent">On Schedule</span>
               </div>
-              <div class="flex items-center gap-1.5 flex-wrap" id="shiftBtnContainer">
-                <button onclick="setShift(-2)" class="shift-btn text-[9px] font-sans font-normal px-2.5 py-1 rounded-lg border border-rosemuted hover:bg-blushlight" data-shift="-2">-2 Days Early</button>
-                <button onclick="setShift(-1)" class="shift-btn text-[9px] font-sans font-normal px-2.5 py-1 rounded-lg border border-rosemuted hover:bg-blushlight" data-shift="-1">-1 Day Early</button>
-                <button onclick="setShift(0)" class="shift-btn text-[9px] font-sans font-normal px-2.5 py-1 rounded-lg border border-roseaccent bg-roseaccent text-white" data-shift="0">Exact</button>
-                <button onclick="setShift(1)" class="shift-btn text-[9px] font-sans font-normal px-2.5 py-1 rounded-lg border border-rosemuted hover:bg-blushlight" data-shift="1">+1 Day Late</button>
-                <button onclick="setShift(2)" class="shift-btn text-[9px] font-sans font-normal px-2.5 py-1 rounded-lg border border-rosemuted hover:bg-blushlight" data-shift="2">+2 Days Late</button>
+              <div class="flex items-center gap-1 flex-wrap" id="shiftBtnContainer">
+                <button onclick="setShift(-2)" class="shift-btn text-[8.5px] font-sans font-normal px-2 py-0.5 rounded-md border border-rosemuted hover:bg-blushlight" data-shift="-2">-2 Days Early</button>
+                <button onclick="setShift(-1)" class="shift-btn text-[8.5px] font-sans font-normal px-2 py-0.5 rounded-md border border-rosemuted hover:bg-blushlight" data-shift="-1">-1 Day Early</button>
+                <button onclick="setShift(0)" class="shift-btn text-[8.5px] font-sans font-normal px-2 py-0.5 rounded-md border border-roseaccent bg-roseaccent text-white" data-shift="0">Exact</button>
+                <button onclick="setShift(1)" class="shift-btn text-[8.5px] font-sans font-normal px-2 py-0.5 rounded-md border border-rosemuted hover:bg-blushlight" data-shift="1">+1 Day Late</button>
+                <button onclick="setShift(2)" class="shift-btn text-[8.5px] font-sans font-normal px-2 py-0.5 rounded-md border border-rosemuted hover:bg-blushlight" data-shift="2">+2 Days Late</button>
               </div>
             </div>
 
             <!-- Phase Advice Card -->
-            <div class="bg-white border border-rosemuted/60 p-3.5 rounded-xl shadow-2xs space-y-2">
-              <div class="flex items-center justify-between border-b border-rosemuted/40 pb-2">
-                <span class="text-[9px] font-sans font-light tracking-[0.2em] uppercase text-mulberry/70">PHASE RITUAL</span>
-                <span id="phaseDateRange" class="text-[9.5px] font-sans font-normal text-rosedeep">Days 1 - 5</span>
+            <div class="bg-white border border-rosemuted/60 p-2.5 rounded-lg shadow-2xs space-y-1">
+              <div class="flex items-center justify-between border-b border-rosemuted/40 pb-1">
+                <span class="text-[8px] font-sans font-light tracking-[0.15em] uppercase text-mulberry/70">PHASE RITUAL</span>
+                <span id="phaseDateRange" class="text-[8.5px] font-sans font-normal text-rosedeep">Days 1 - 5</span>
               </div>
-              <h3 id="phaseTitleHeadline" class="font-section-title text-xl text-mulberry font-semibold">Menstrual Phase Ritual</h3>
-              <p id="phaseAdviceText" class="text-xs font-sans font-light text-mulberry/80 leading-relaxed">
-                Estrogen and progesterone are at their lowest levels. Prioritize restful movement, magnesium-rich foods, warm teas, and gentle self-compassion.
+              <h3 id="phaseTitleHeadline" class="font-section-title text-base text-mulberry font-semibold">Menstrual Phase Ritual</h3>
+              <p id="phaseAdviceText" class="text-[11px] font-sans font-light text-mulberry/80 leading-relaxed">
+                Estrogen and progesterone are low. Prioritize restful movement, magnesium-rich foods, warm teas, and gentle self-compassion.
               </p>
             </div>
 
@@ -252,70 +231,64 @@
       </div>
     </div>
 
-    <!-- SECTION 2: 🩸 DAILY PERIOD & SYMPTOM LOGGER -->
-    <div class="bg-white border border-rosemuted rounded-2xl overflow-hidden shadow-xs">
-      <div class="px-3.5 py-2.5 flex items-center justify-between cursor-pointer bg-blushlight text-mulberry hover:bg-rosemuted/30 transition-colors"
+    <!-- SECTION 2: 🩸 COMPACT DAILY LOGGER (NO SYMPTOMS) -->
+    <div class="bg-white border border-rosemuted rounded-xl overflow-hidden shadow-2xs">
+      <div class="px-3 py-2 flex items-center justify-between cursor-pointer bg-blushlight text-mulberry hover:bg-rosemuted/30 transition-colors"
            onclick="toggleRollout('sec-log')">
-        <div class="flex items-center gap-2">
-          <span class="text-sm">🩸</span>
-          <h2 class="font-section-title text-lg sm:text-xl font-bold tracking-tight text-mulberry">
-            Log Period & Symptoms
+        <div class="flex items-center gap-1.5">
+          <span class="text-xs">🩸</span>
+          <h2 class="font-section-title text-base sm:text-lg font-bold tracking-tight text-mulberry">
+            Log Period & Notes
           </h2>
         </div>
-        <div class="flex items-center gap-2">
-          <span id="logStatusBadge" class="text-[9.5px] font-sans font-normal px-2.5 py-0.5 rounded-full bg-white border border-rosemuted text-mulberry">
+        <div class="flex items-center gap-1.5">
+          <span id="logStatusBadge" class="text-[8.5px] font-sans font-normal px-2 py-0.5 rounded-full bg-white border border-rosemuted text-mulberry">
             SELECT DATE
           </span>
-          <button class="text-mulberry text-xs focus:outline-none">
+          <button class="text-mulberry text-[10px] focus:outline-none">
             <span id="chevron-sec-log" class="inline-block chevron-icon">▼</span>
           </button>
         </div>
       </div>
 
       <div class="rollout-content" id="rollout-sec-log">
-        <div class="rollout-inner p-4 bg-petal space-y-4">
-          <form id="dailyLogForm" onsubmit="handleSaveLog(event)" class="space-y-3.5">
+        <div class="rollout-inner p-3 bg-petal space-y-2.5">
+          <form id="dailyLogForm" onsubmit="handleSaveLog(event)" class="space-y-2.5">
             
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 bg-white p-3 rounded-xl border border-rosemuted/60">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 bg-white p-2.5 rounded-lg border border-rosemuted/60">
               <div>
-                <label class="block text-[8.5px] font-sans font-light tracking-[0.2em] uppercase text-mulberry/70">SELECT DATE TO LOG OR MODIFY</label>
+                <label class="block text-[8px] font-sans font-light tracking-[0.15em] uppercase text-mulberry/70">SELECT DATE</label>
                 <input type="date" id="logDateInput" required onchange="loadLogForSelectedDate()"
-                       class="mt-1 bg-cream border border-rosemuted rounded-lg px-3 py-1 font-sans text-xs text-mulberry focus:outline-none focus:border-roseaccent">
+                       class="mt-0.5 bg-cream border border-rosemuted rounded-md px-2 py-1 font-sans text-xs text-mulberry focus:outline-none focus:border-roseaccent">
               </div>
-              <div class="flex items-center gap-2 flex-wrap">
-                <button type="button" onclick="setLogDateToday()" class="text-[9px] font-sans font-normal uppercase tracking-wider px-3 py-1.5 bg-blushlight border border-rosemuted rounded-full hover:bg-rosemuted/40">
+              <div class="flex items-center gap-1.5 flex-wrap">
+                <button type="button" onclick="setLogDateToday()" class="text-[8.5px] font-sans font-normal uppercase tracking-wider px-2.5 py-1 bg-blushlight border border-rosemuted rounded-full hover:bg-rosemuted/40">
                   Set to Today
                 </button>
-                <button type="button" onclick="clearLogForSelectedDate()" class="text-[9px] font-sans font-normal uppercase tracking-wider px-3 py-1.5 bg-red-50 text-red-600 border border-red-200 rounded-full hover:bg-red-100">
+                <button type="button" onclick="clearLogForSelectedDate()" class="text-[8.5px] font-sans font-normal uppercase tracking-wider px-2.5 py-1 bg-red-50 text-red-600 border border-red-200 rounded-full hover:bg-red-100">
                   🧹 Clear Date Log
                 </button>
               </div>
             </div>
 
             <!-- Flow Selector -->
-            <div class="bg-white p-3 rounded-xl border border-rosemuted/60 space-y-1.5">
-              <label class="block text-[8.5px] font-sans font-light tracking-[0.2em] uppercase text-mulberry/70">PERIOD FLOW INTENSITY</label>
-              <div class="grid grid-cols-5 gap-1.5">
-                <button type="button" onclick="selectFlow('None')" class="flow-btn py-1.5 rounded-lg text-xs font-sans font-light border border-rosemuted/50 text-center hover:bg-blushlight" data-flow="None">None</button>
-                <button type="button" onclick="selectFlow('Spotting')" class="flow-btn py-1.5 rounded-lg text-xs font-sans font-light border border-rosemuted/50 text-center hover:bg-blushlight" data-flow="Spotting">Spotting</button>
-                <button type="button" onclick="selectFlow('Light')" class="flow-btn py-1.5 rounded-lg text-xs font-sans font-light border border-rosemuted/50 text-center hover:bg-blushlight" data-flow="Light">Light</button>
-                <button type="button" onclick="selectFlow('Medium')" class="flow-btn py-1.5 rounded-lg text-xs font-sans font-light border border-rosemuted/50 text-center hover:bg-blushlight" data-flow="Medium">Medium</button>
-                <button type="button" onclick="selectFlow('Heavy')" class="flow-btn py-1.5 rounded-lg text-xs font-sans font-light border border-rosemuted/50 text-center hover:bg-blushlight" data-flow="Heavy">Heavy</button>
+            <div class="bg-white p-2.5 rounded-lg border border-rosemuted/60 space-y-1">
+              <label class="block text-[8px] font-sans font-light tracking-[0.15em] uppercase text-mulberry/70">PERIOD FLOW INTENSITY</label>
+              <div class="grid grid-cols-5 gap-1">
+                <button type="button" onclick="selectFlow('None')" class="flow-btn py-1 rounded-md text-[11px] font-sans font-light border border-rosemuted/50 text-center hover:bg-blushlight" data-flow="None">None</button>
+                <button type="button" onclick="selectFlow('Spotting')" class="flow-btn py-1 rounded-md text-[11px] font-sans font-light border border-rosemuted/50 text-center hover:bg-blushlight" data-flow="Spotting">Spotting</button>
+                <button type="button" onclick="selectFlow('Light')" class="flow-btn py-1 rounded-md text-[11px] font-sans font-light border border-rosemuted/50 text-center hover:bg-blushlight" data-flow="Light">Light</button>
+                <button type="button" onclick="selectFlow('Medium')" class="flow-btn py-1 rounded-md text-[11px] font-sans font-light border border-rosemuted/50 text-center hover:bg-blushlight" data-flow="Medium">Medium</button>
+                <button type="button" onclick="selectFlow('Heavy')" class="flow-btn py-1 rounded-md text-[11px] font-sans font-light border border-rosemuted/50 text-center hover:bg-blushlight" data-flow="Heavy">Heavy</button>
               </div>
               <input type="hidden" id="selectedFlow" value="None">
             </div>
 
-            <!-- Symptoms Container -->
-            <div class="bg-white p-3 rounded-xl border border-rosemuted/60 space-y-1.5">
-              <label class="block text-[8.5px] font-sans font-light tracking-[0.2em] uppercase text-mulberry/70">SYMPTOMS & RITUALS</label>
-              <div class="flex flex-wrap gap-1.5" id="symptomsContainer"></div>
-            </div>
-
             <!-- Mood & Notes -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div class="bg-white p-3 rounded-xl border border-rosemuted/60 space-y-1">
-                <label class="block text-[8.5px] font-sans font-light tracking-[0.2em] uppercase text-mulberry/70">MOOD & MINDSET</label>
-                <select id="logMood" class="w-full bg-cream border border-rosemuted rounded-lg px-2.5 py-1.5 text-xs font-sans font-light text-mulberry focus:outline-none">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              <div class="bg-white p-2.5 rounded-lg border border-rosemuted/60 space-y-1">
+                <label class="block text-[8px] font-sans font-light tracking-[0.15em] uppercase text-mulberry/70">MOOD & MINDSET</label>
+                <select id="logMood" class="w-full bg-cream border border-rosemuted rounded-md px-2 py-1 text-xs font-sans font-light text-mulberry focus:outline-none">
                   <option value="Calm & Balanced">Calm & Balanced</option>
                   <option value="High Energy">High Energy</option>
                   <option value="Sensitive">Sensitive</option>
@@ -325,19 +298,19 @@
                 </select>
               </div>
 
-              <div class="bg-white p-3 rounded-xl border border-rosemuted/60 space-y-1">
-                <label class="block text-[8.5px] font-sans font-light tracking-[0.2em] uppercase text-mulberry/70">NOTES & REFLECTIONS</label>
-                <input type="text" id="logNotes" placeholder="e.g. Drank chamomile tea, hot bath..." 
-                       class="w-full bg-cream border border-rosemuted rounded-lg px-3 py-1.5 text-xs font-sans font-light text-mulberry focus:outline-none">
+              <div class="bg-white p-2.5 rounded-lg border border-rosemuted/60 space-y-1">
+                <label class="block text-[8px] font-sans font-light tracking-[0.15em] uppercase text-mulberry/70">NOTES & REFLECTIONS</label>
+                <input type="text" id="logNotes" placeholder="e.g. Drank chamomile tea..." 
+                       class="w-full bg-cream border border-rosemuted rounded-md px-2.5 py-1 text-xs font-sans font-light text-mulberry focus:outline-none">
               </div>
             </div>
 
-            <div class="flex items-center justify-between pt-1">
-              <button type="button" onclick="clearLogForSelectedDate()" class="text-[9px] font-sans font-light text-mulberry/60 hover:text-red-600 underline">
+            <div class="flex items-center justify-between pt-0.5">
+              <button type="button" onclick="clearLogForSelectedDate()" class="text-[8.5px] font-sans font-light text-mulberry/60 hover:text-red-600 underline">
                 Un-log this date completely
               </button>
 
-              <button type="submit" class="px-5 py-2 bg-roseaccent text-white rounded-full text-[9.5px] font-sans font-normal tracking-[0.2em] uppercase hover:bg-rosedeep transition shadow-2xs">
+              <button type="submit" class="px-4 py-1.5 bg-roseaccent text-white rounded-full text-[8.5px] font-sans font-normal tracking-[0.15em] uppercase hover:bg-rosedeep transition shadow-2xs">
                 Save Log Entry
               </button>
             </div>
@@ -348,91 +321,93 @@
       </div>
     </div>
 
-    <!-- SECTION 3: 📊 PERIOD HISTORY & DATE LOGS -->
-    <div class="bg-white border border-rosemuted rounded-2xl overflow-hidden shadow-xs">
-      <div class="px-3.5 py-2.5 flex items-center justify-between cursor-pointer bg-blushlight text-mulberry hover:bg-rosemuted/30 transition-colors"
+    <!-- SECTION 3: 📊 PERIOD HISTORY -->
+    <div class="bg-white border border-rosemuted rounded-xl overflow-hidden shadow-2xs">
+      <div class="px-3 py-2 flex items-center justify-between cursor-pointer bg-blushlight text-mulberry hover:bg-rosemuted/30 transition-colors"
            onclick="toggleRollout('sec-history')">
-        <div class="flex items-center gap-2">
-          <span class="text-sm">📊</span>
-          <h2 class="font-section-title text-lg sm:text-xl font-bold tracking-tight text-mulberry">
-            Period History & Log Editor
+        <div class="flex items-center gap-1.5">
+          <span class="text-xs">📊</span>
+          <h2 class="font-section-title text-base sm:text-lg font-bold tracking-tight text-mulberry">
+            Period History & Logs
           </h2>
         </div>
-        <div class="flex items-center gap-2">
-          <span id="historyCountBadge" class="text-[9.5px] font-sans font-normal px-2.5 py-0.5 rounded-full bg-mulberry text-white">
+        <div class="flex items-center gap-1.5">
+          <span id="historyCountBadge" class="text-[8.5px] font-sans font-normal px-2 py-0.5 rounded-full bg-mulberry text-white">
             0 Logs
           </span>
-          <button class="text-mulberry text-xs focus:outline-none">
+          <button class="text-mulberry text-[10px] focus:outline-none">
             <span id="chevron-sec-history" class="inline-block chevron-icon">▼</span>
           </button>
         </div>
       </div>
 
       <div class="rollout-content" id="rollout-sec-history">
-        <div class="rollout-inner p-4 bg-petal space-y-3">
-          <div id="historyLogsContainer" class="space-y-2"></div>
+        <div class="rollout-inner p-3 bg-petal space-y-2">
+          <div id="historyLogsContainer" class="space-y-1.5"></div>
         </div>
       </div>
     </div>
 
-    <!-- SECTION 4: ⚙️ CYCLE SETTINGS & EXPLICIT DATES -->
-    <div class="bg-white border border-rosemuted rounded-2xl overflow-hidden shadow-xs">
-      <div class="px-3.5 py-2.5 flex items-center justify-between cursor-pointer bg-blushlight text-mulberry hover:bg-rosemuted/30 transition-colors"
+    <!-- SECTION 4: ⚙️ WORKING SETTINGS FORM -->
+    <div class="bg-white border border-rosemuted rounded-xl overflow-hidden shadow-2xs">
+      <div class="px-3 py-2 flex items-center justify-between cursor-pointer bg-blushlight text-mulberry hover:bg-rosemuted/30 transition-colors"
            onclick="toggleRollout('sec-settings')">
-        <div class="flex items-center gap-2">
-          <span class="text-sm">⚙️</span>
-          <h2 class="font-section-title text-lg sm:text-xl font-bold tracking-tight text-mulberry">
+        <div class="flex items-center gap-1.5">
+          <span class="text-xs">⚙️</span>
+          <h2 class="font-section-title text-base sm:text-lg font-bold tracking-tight text-mulberry">
             Cycle Settings & Date Modifiers
           </h2>
         </div>
-        <div class="flex items-center gap-2">
-          <span id="cycleLengthBadge" class="text-[9.5px] font-sans font-normal px-2.5 py-0.5 rounded-full bg-white border border-rosemuted text-mulberry">
+        <div class="flex items-center gap-1.5">
+          <span id="cycleLengthBadge" class="text-[8.5px] font-sans font-normal px-2 py-0.5 rounded-full bg-white border border-rosemuted text-mulberry">
             25-DAY DEFAULT
           </span>
-          <button class="text-mulberry text-xs focus:outline-none">
+          <button class="text-mulberry text-[10px] focus:outline-none">
             <span id="chevron-sec-settings" class="inline-block chevron-icon">▼</span>
           </button>
         </div>
       </div>
 
       <div class="rollout-content" id="rollout-sec-settings">
-        <div class="rollout-inner p-4 bg-petal space-y-4">
-          <form onsubmit="handleSaveSettings(event)" class="space-y-3.5">
+        <div class="rollout-inner p-3 bg-petal space-y-3">
+          
+          <!-- FIXED FORM SUBMIT -->
+          <form id="cycleSettingsForm" onsubmit="handleSaveSettings(event)" class="space-y-2.5">
             
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div class="bg-white p-3 rounded-xl border border-rosemuted/60 space-y-1">
-                <label class="block text-[8.5px] font-sans font-light tracking-[0.2em] uppercase text-mulberry/70">LAST PERIOD START DATE *</label>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              <div class="bg-white p-2.5 rounded-lg border border-rosemuted/60 space-y-1">
+                <label class="block text-[8px] font-sans font-light tracking-[0.15em] uppercase text-mulberry/70">LAST PERIOD START DATE *</label>
                 <input type="date" id="settingStartDate" required onchange="handleStartDateChange()"
-                       class="w-full bg-cream border border-rosemuted rounded-lg px-2.5 py-1.5 text-xs font-sans font-light text-mulberry focus:outline-none focus:border-roseaccent">
+                       class="w-full bg-cream border border-rosemuted rounded-md px-2 py-1 text-xs font-sans font-light text-mulberry focus:outline-none focus:border-roseaccent">
               </div>
 
-              <div class="bg-white p-3 rounded-xl border border-rosemuted/60 space-y-1">
-                <label class="block text-[8.5px] font-sans font-light tracking-[0.2em] uppercase text-mulberry/70">LAST PERIOD END DATE *</label>
+              <div class="bg-white p-2.5 rounded-lg border border-rosemuted/60 space-y-1">
+                <label class="block text-[8px] font-sans font-light tracking-[0.15em] uppercase text-mulberry/70">LAST PERIOD END DATE *</label>
                 <input type="date" id="settingEndDate" required onchange="handleEndDateChange()"
-                       class="w-full bg-cream border border-rosemuted rounded-lg px-2.5 py-1.5 text-xs font-sans font-light text-mulberry focus:outline-none focus:border-roseaccent">
+                       class="w-full bg-cream border border-rosemuted rounded-md px-2 py-1 text-xs font-sans font-light text-mulberry focus:outline-none focus:border-roseaccent">
               </div>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div class="bg-white p-3 rounded-xl border border-rosemuted/60 space-y-1">
-                <label class="block text-[8.5px] font-sans font-light tracking-[0.2em] uppercase text-mulberry/70">CYCLE LENGTH (DAYS) *</label>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              <div class="bg-white p-2.5 rounded-lg border border-rosemuted/60 space-y-1">
+                <label class="block text-[8px] font-sans font-light tracking-[0.15em] uppercase text-mulberry/70">CYCLE LENGTH (DAYS) *</label>
                 <input type="number" id="settingCycleLength" min="20" max="45" value="25" required
-                       class="w-full bg-cream border border-rosemuted rounded-lg px-2.5 py-1.5 text-xs font-sans font-light text-mulberry focus:outline-none focus:border-roseaccent">
+                       class="w-full bg-cream border border-rosemuted rounded-md px-2 py-1 text-xs font-sans font-light text-mulberry focus:outline-none focus:border-roseaccent">
               </div>
 
-              <div class="bg-white p-3 rounded-xl border border-rosemuted/60 space-y-1">
-                <label class="block text-[8.5px] font-sans font-light tracking-[0.2em] uppercase text-mulberry/70">PERIOD DURATION (DAYS)</label>
-                <input type="number" id="settingPeriodDuration" min="1" max="12" value="5" readOnly
-                       class="w-full bg-cream/50 border border-rosemuted rounded-lg px-2.5 py-1.5 text-xs font-sans font-light text-mulberry/70 focus:outline-none">
+              <div class="bg-white p-2.5 rounded-lg border border-rosemuted/60 space-y-1">
+                <label class="block text-[8px] font-sans font-light tracking-[0.15em] uppercase text-mulberry/70">PERIOD DURATION (DAYS) *</label>
+                <input type="number" id="settingPeriodDuration" min="1" max="14" value="5" required onchange="handleDurationChange()"
+                       class="w-full bg-cream border border-rosemuted rounded-md px-2 py-1 text-xs font-sans font-light text-mulberry focus:outline-none focus:border-roseaccent">
               </div>
             </div>
 
-            <div class="flex flex-col sm:flex-row items-center justify-between gap-2 pt-2 border-t border-rosemuted/40">
-              <button type="button" onclick="resetAllData()" class="text-[9px] font-sans font-light text-red-600 border border-red-200 px-3 py-1.5 rounded-full hover:bg-red-50">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-2 pt-1 border-t border-rosemuted/40">
+              <button type="button" onclick="resetAllData()" class="text-[8.5px] font-sans font-light text-red-600 border border-red-200 px-2.5 py-1 rounded-full hover:bg-red-50">
                 ⚠️ Reset All Cycle Data
               </button>
 
-              <button type="submit" class="px-5 py-2 bg-mulberry text-white rounded-full text-[9.5px] font-sans font-normal tracking-[0.2em] uppercase hover:bg-roseaccent transition shadow-2xs">
+              <button type="submit" class="px-4 py-1.5 bg-mulberry text-white rounded-full text-[8.5px] font-sans font-normal tracking-[0.15em] uppercase hover:bg-roseaccent transition shadow-2xs">
                 Save Settings & Dates
               </button>
             </div>
@@ -444,14 +419,9 @@
 
   </section>
 
-  <!-- JavaScript Logic -->
+  <!-- JavaScript Engine -->
   <script>
-    const STORAGE_KEY = 'THE_PERIOD_EDIT_PINK_LUXURY_V4';
-
-    const SYMPTOMS_LIST = [
-      'Cramps', 'Bloating', 'Fatigue', 'Acne', 'Mood Swings', 
-      'High Energy', 'Cravings', 'Headache', 'Breast Tenderness', 'Glowy Skin'
-    ];
+    const STORAGE_KEY = 'THE_PERIOD_EDIT_PINK_LUXURY_V5';
 
     let state = {
       startDate: '',
@@ -460,8 +430,6 @@
       shiftDays: 0,
       logs: {}
     };
-
-    let selectedSymptoms = [];
 
     function init() {
       const saved = localStorage.getItem(STORAGE_KEY);
@@ -492,7 +460,6 @@
       const dateOpts = { month: 'long', year: 'numeric' };
       document.getElementById('headerMonthYear').innerText = new Date().toLocaleDateString('en-US', dateOpts).toUpperCase();
 
-      renderSymptomPills();
       setLogDateToday();
       syncInputs();
       calculateAndRender();
@@ -536,6 +503,14 @@
       const end = parseDate(document.getElementById('settingEndDate').value);
       const duration = Math.max(1, Math.round((end - start) / (1000 * 60 * 60 * 24)) + 1);
       document.getElementById('settingPeriodDuration').value = duration;
+    }
+
+    function handleDurationChange() {
+      const start = parseDate(document.getElementById('settingStartDate').value);
+      const duration = parseInt(document.getElementById('settingPeriodDuration').value) || 5;
+      const newEnd = new Date(start);
+      newEnd.setDate(start.getDate() + (duration - 1));
+      document.getElementById('settingEndDate').value = formatDateStr(newEnd);
     }
 
     function calculateCycleInfo() {
@@ -626,9 +601,9 @@
 
       document.querySelectorAll('.shift-btn').forEach(btn => {
         if (parseInt(btn.getAttribute('data-shift')) === shift) {
-          btn.className = 'shift-btn text-[9px] font-sans font-normal px-2.5 py-1 rounded-lg border border-roseaccent bg-roseaccent text-white';
+          btn.className = 'shift-btn text-[8.5px] font-sans font-normal px-2 py-0.5 rounded-md border border-roseaccent bg-roseaccent text-white';
         } else {
-          btn.className = 'shift-btn text-[9px] font-sans font-normal px-2.5 py-1 rounded-lg border border-rosemuted hover:bg-blushlight text-mulberry';
+          btn.className = 'shift-btn text-[8.5px] font-sans font-normal px-2 py-0.5 rounded-md border border-rosemuted hover:bg-blushlight text-mulberry';
         }
       });
 
@@ -648,24 +623,19 @@
         const y = cy + r * Math.sin(angle);
 
         if (i === currentDay) {
-          // Render Bouncing Pink Heart for Current Day
           const heartText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
           heartText.setAttribute('x', x);
           heartText.setAttribute('y', y);
-          heartText.setAttribute('font-size', '16');
+          heartText.setAttribute('font-size', '15');
           heartText.setAttribute('text-anchor', 'middle');
           heartText.setAttribute('dominant-baseline', 'central');
-          // Rotate counter to SVG's -90deg container rotation so the heart stays upright
           heartText.setAttribute('transform', `rotate(90, ${x}, ${y})`);
           heartText.setAttribute('class', 'current-heart');
           heartText.textContent = '💗';
           
-          heartText.addEventListener('click', () => {
-            jumpToLogForDay(i);
-          });
+          heartText.addEventListener('click', () => jumpToLogForDay(i));
           container.appendChild(heartText);
         } else {
-          // Render standard node for other days
           const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
           circle.setAttribute('cx', x);
           circle.setAttribute('cy', y);
@@ -677,9 +647,7 @@
           circle.setAttribute('fill', fillColor);
           circle.setAttribute('class', 'cycle-node');
 
-          circle.addEventListener('click', () => {
-            jumpToLogForDay(i);
-          });
+          circle.addEventListener('click', () => jumpToLogForDay(i));
           container.appendChild(circle);
         }
       }
@@ -698,41 +666,13 @@
       }
     }
 
-    function renderSymptomPills() {
-      const container = document.getElementById('symptomsContainer');
-      container.innerHTML = '';
-
-      SYMPTOMS_LIST.forEach(sym => {
-        const isSelected = selectedSymptoms.includes(sym);
-        const btn = document.createElement('button');
-        btn.type = 'button';
-        btn.className = `text-[10px] font-sans font-normal px-2.5 py-1 rounded-full border transition ${
-          isSelected 
-            ? 'bg-roseaccent text-white border-roseaccent shadow-2xs' 
-            : 'bg-cream text-mulberry border-rosemuted hover:bg-blushlight'
-        }`;
-        btn.innerText = sym;
-        btn.onclick = () => toggleSymptom(sym);
-        container.appendChild(btn);
-      });
-    }
-
-    function toggleSymptom(sym) {
-      if (selectedSymptoms.includes(sym)) {
-        selectedSymptoms = selectedSymptoms.filter(s => s !== sym);
-      } else {
-        selectedSymptoms.push(sym);
-      }
-      renderSymptomPills();
-    }
-
     function selectFlow(flow) {
       document.getElementById('selectedFlow').value = flow;
       document.querySelectorAll('.flow-btn').forEach(btn => {
         if (btn.getAttribute('data-flow') === flow) {
-          btn.className = 'flow-btn py-1.5 rounded-lg text-xs font-sans font-medium bg-roseaccent text-white border border-roseaccent text-center shadow-2xs';
+          btn.className = 'flow-btn py-1 rounded-md text-[11px] font-sans font-medium bg-roseaccent text-white border border-roseaccent text-center shadow-2xs';
         } else {
-          btn.className = 'flow-btn py-1.5 rounded-lg text-xs font-sans font-light border border-rosemuted/50 text-center hover:bg-blushlight text-mulberry';
+          btn.className = 'flow-btn py-1 rounded-md text-[11px] font-sans font-light border border-rosemuted/50 text-center hover:bg-blushlight text-mulberry';
         }
       });
     }
@@ -748,20 +688,17 @@
 
       if (log) {
         selectFlow(log.flow || 'None');
-        selectedSymptoms = log.symptoms ? [...log.symptoms] : [];
         document.getElementById('logMood').value = log.mood || 'Calm & Balanced';
         document.getElementById('logNotes').value = log.notes || '';
         document.getElementById('logStatusBadge').innerText = 'LOGGED EDIT';
-        document.getElementById('logStatusBadge').className = 'text-[9.5px] font-sans font-normal px-2.5 py-0.5 rounded-full bg-roseaccent text-white';
+        document.getElementById('logStatusBadge').className = 'text-[8.5px] font-sans font-normal px-2 py-0.5 rounded-full bg-roseaccent text-white';
       } else {
         selectFlow('None');
-        selectedSymptoms = [];
         document.getElementById('logMood').value = 'Calm & Balanced';
         document.getElementById('logNotes').value = '';
         document.getElementById('logStatusBadge').innerText = 'NEW EDIT';
-        document.getElementById('logStatusBadge').className = 'text-[9.5px] font-sans font-normal px-2.5 py-0.5 rounded-full bg-white border border-rosemuted text-mulberry';
+        document.getElementById('logStatusBadge').className = 'text-[8.5px] font-sans font-normal px-2 py-0.5 rounded-full bg-white border border-rosemuted text-mulberry';
       }
-      renderSymptomPills();
     }
 
     function handleSaveLog(e) {
@@ -771,12 +708,7 @@
       const mood = document.getElementById('logMood').value;
       const notes = document.getElementById('logNotes').value;
 
-      state.logs[dateStr] = {
-        flow,
-        symptoms: [...selectedSymptoms],
-        mood,
-        notes
-      };
+      state.logs[dateStr] = { flow, mood, notes };
 
       saveState();
       calculateAndRender();
@@ -802,8 +734,8 @@
 
       if (dates.length === 0) {
         container.innerHTML = `
-          <div class="text-center py-6 text-xs font-sans font-light text-mulberry/60">
-            No cycle logs recorded yet. Use the log section above or tap the heart node to add an entry.
+          <div class="text-center py-4 text-[11px] font-sans font-light text-mulberry/60">
+            No cycle logs recorded yet.
           </div>
         `;
         return;
@@ -812,25 +744,22 @@
       dates.forEach(dateStr => {
         const log = state.logs[dateStr];
         const item = document.createElement('div');
-        item.className = 'bg-white p-3 rounded-xl border border-rosemuted/60 flex flex-col sm:flex-row sm:items-center justify-between gap-2 shadow-2xs';
+        item.className = 'bg-white p-2 rounded-lg border border-rosemuted/60 flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 shadow-2xs';
 
         const formattedDate = parseDate(dateStr).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 
         item.innerHTML = `
-          <div class="space-y-1">
-            <div class="flex items-center gap-2">
-              <span class="text-xs font-section-title font-bold text-mulberry">${formattedDate}</span>
-              <span class="text-[9px] font-sans font-normal px-2 py-0.5 rounded-full bg-blushlight text-rosedeep border border-rosemuted/40">${log.flow} Flow</span>
-              <span class="text-[9px] font-sans font-light text-mulberry/70">${log.mood}</span>
+          <div class="space-y-0.5">
+            <div class="flex items-center gap-1.5">
+              <span class="text-[11px] font-section-title font-bold text-mulberry">${formattedDate}</span>
+              <span class="text-[8.5px] font-sans font-normal px-1.5 py-0.5 rounded-full bg-blushlight text-rosedeep border border-rosemuted/40">${log.flow} Flow</span>
+              <span class="text-[8.5px] font-sans font-light text-mulberry/70">${log.mood}</span>
             </div>
-            <div class="text-[11px] font-sans font-light text-mulberry/80">
-              ${log.symptoms && log.symptoms.length > 0 ? `Symptoms: ${log.symptoms.join(', ')}` : 'No symptoms logged'}
-              ${log.notes ? `• "${log.notes}"` : ''}
-            </div>
+            ${log.notes ? `<div class="text-[10px] font-sans font-light text-mulberry/80">"${log.notes}"</div>` : ''}
           </div>
-          <div class="flex items-center gap-1.5 self-end sm:self-center">
-            <button onclick="editLogDate('${dateStr}')" class="text-[9px] font-sans font-normal uppercase px-2.5 py-1 bg-blushlight border border-rosemuted rounded-lg hover:bg-rosemuted/40">Edit</button>
-            <button onclick="deleteLogDate('${dateStr}')" class="text-[9px] font-sans font-normal uppercase px-2.5 py-1 bg-red-50 text-red-600 border border-red-200 rounded-lg hover:bg-red-100">Delete</button>
+          <div class="flex items-center gap-1 self-end sm:self-center">
+            <button onclick="editLogDate('${dateStr}')" class="text-[8px] font-sans font-normal uppercase px-2 py-0.5 bg-blushlight border border-rosemuted rounded-md hover:bg-rosemuted/40">Edit</button>
+            <button onclick="deleteLogDate('${dateStr}')" class="text-[8px] font-sans font-normal uppercase px-2 py-0.5 bg-red-50 text-red-600 border border-red-200 rounded-md hover:bg-red-100">Delete</button>
           </div>
         `;
         container.appendChild(item);
@@ -862,9 +791,16 @@
 
     function handleSaveSettings(e) {
       e.preventDefault();
-      state.startDate = document.getElementById('settingStartDate').value;
-      state.endDate = document.getElementById('settingEndDate').value;
-      state.cycleLength = parseInt(document.getElementById('settingCycleLength').value) || 25;
+      
+      const newStart = document.getElementById('settingStartDate').value;
+      const newEnd = document.getElementById('settingEndDate').value;
+      const newCycleLen = parseInt(document.getElementById('settingCycleLength').value) || 25;
+
+      if (!newStart || !newEnd) return;
+
+      state.startDate = newStart;
+      state.endDate = newEnd;
+      state.cycleLength = newCycleLen;
 
       saveState();
       syncInputs();
