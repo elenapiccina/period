@@ -144,7 +144,10 @@
 
     <div class="bg-white/90 border border-rosemuted px-2.5 py-1.5 rounded-xl flex flex-col justify-between shadow-2xs">
       <span class="text-[8px] font-sans font-light tracking-[0.15em] text-mulberry/70 uppercase">Next Period Date</span>
-      <span id="metricNextDate" class="text-sm font-section-title font-bold text-rosedeep mt-0.5 truncate">Nov 26</span>
+      <div class="flex flex-col mt-0.5">
+        <span id="metricNextDate" class="text-sm font-section-title font-bold text-rosedeep leading-none truncate">Nov 26</span>
+        <span id="metricCountdown" class="text-[9.5px] font-sans font-normal text-mulberry/70 mt-0.5">In 25 Days</span>
+      </div>
     </div>
 
     <div class="bg-white/90 border border-rosemuted px-2.5 py-1.5 rounded-xl flex flex-col justify-between shadow-2xs">
@@ -191,7 +194,7 @@
               <span class="text-[8px] font-sans font-light tracking-[0.18em] text-mulberry/60 uppercase">CURRENT CYCLE</span>
               <span id="ringDayText" class="text-xl font-sans font-normal text-mulberry my-0.5">DAY 1</span>
               <span id="ringPhaseText" class="text-[11px] font-section-title font-bold text-rosedeep">Menstrual Phase</span>
-              <span id="ringForecastText" class="text-[8.5px] font-sans font-light text-mulberry/70 mt-0.5">Next: Nov 26</span>
+              <span id="ringForecastText" class="text-[8.5px] font-sans font-light text-mulberry/70 mt-0.5">Next: Nov 26 (In 25 Days)</span>
             </div>
           </div>
 
@@ -419,7 +422,7 @@
 
   <!-- JavaScript Engine -->
   <script>
-    const STORAGE_KEY = 'THE_PERIOD_EDIT_PINK_LUXURY_V6';
+    const STORAGE_KEY = 'THE_PERIOD_EDIT_PINK_LUXURY_V7';
 
     let state = {
       startDate: '',
@@ -556,7 +559,7 @@
         dateRange = `Days 14 - ${C}`;
       }
 
-      const nextPeriodFormatted = nextPeriod.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+      const nextPeriodFormatted = nextPeriod.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
 
       return {
         currentDay,
@@ -568,7 +571,6 @@
         dateRange,
         daysUntilNext,
         nextPeriodDateStr: nextPeriodFormatted,
-        nextPeriodShort: nextPeriod.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
         periodDateWindowStr: `${start.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} - ${end.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`
       };
     }
@@ -580,7 +582,8 @@
       document.getElementById('metricTotalCycle').innerText = `/ ${calc.cycleLength} Days`;
       document.getElementById('metricCurrentPhase').innerText = calc.phase.replace(' Phase', '');
       document.getElementById('metricCurrentPhase').style.color = calc.phaseColor;
-      document.getElementById('metricNextDate').innerText = calc.nextPeriodShort;
+      document.getElementById('metricNextDate').innerText = calc.nextPeriodDateStr;
+      document.getElementById('metricCountdown').innerText = `In ${calc.daysUntilNext} Days`;
       document.getElementById('metricPeriodDates').innerText = calc.periodDateWindowStr;
 
       document.getElementById('badgePhase').innerText = calc.phase.toUpperCase();
@@ -588,7 +591,7 @@
 
       document.getElementById('ringDayText').innerText = `DAY ${calc.currentDay}`;
       document.getElementById('ringPhaseText').innerText = calc.phase;
-      document.getElementById('ringForecastText').innerText = `Next: ${calc.nextPeriodDateStr}`;
+      document.getElementById('ringForecastText').innerText = `Next: ${calc.nextPeriodDateStr} (In ${calc.daysUntilNext} Days)`;
 
       document.getElementById('phaseDateRange').innerText = calc.dateRange;
       document.getElementById('phaseTitleHeadline').innerText = `${calc.phase} Ritual`;
