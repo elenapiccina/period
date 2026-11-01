@@ -143,8 +143,8 @@
     </div>
 
     <div class="bg-white/90 border border-rosemuted px-2.5 py-1.5 rounded-xl flex flex-col justify-between shadow-2xs">
-      <span class="text-[8px] font-sans font-light tracking-[0.15em] text-mulberry/70 uppercase">Next Period In</span>
-      <span id="metricCountdown" class="text-base font-sans font-normal text-mulberry mt-0.5">25 Days</span>
+      <span class="text-[8px] font-sans font-light tracking-[0.15em] text-mulberry/70 uppercase">Next Period Date</span>
+      <span id="metricNextDate" class="text-sm font-section-title font-bold text-rosedeep mt-0.5 truncate">Nov 26</span>
     </div>
 
     <div class="bg-white/90 border border-rosemuted px-2.5 py-1.5 rounded-xl flex flex-col justify-between shadow-2xs">
@@ -231,7 +231,7 @@
       </div>
     </div>
 
-    <!-- SECTION 2: 🩸 COMPACT DAILY LOGGER (NO SYMPTOMS) -->
+    <!-- SECTION 2: 🩸 COMPACT DAILY LOGGER -->
     <div class="bg-white border border-rosemuted rounded-xl overflow-hidden shadow-2xs">
       <div class="px-3 py-2 flex items-center justify-between cursor-pointer bg-blushlight text-mulberry hover:bg-rosemuted/30 transition-colors"
            onclick="toggleRollout('sec-log')">
@@ -316,7 +316,6 @@
             </div>
 
           </form>
-
         </div>
       </div>
     </div>
@@ -371,7 +370,6 @@
       <div class="rollout-content" id="rollout-sec-settings">
         <div class="rollout-inner p-3 bg-petal space-y-3">
           
-          <!-- FIXED FORM SUBMIT -->
           <form id="cycleSettingsForm" onsubmit="handleSaveSettings(event)" class="space-y-2.5">
             
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -421,7 +419,7 @@
 
   <!-- JavaScript Engine -->
   <script>
-    const STORAGE_KEY = 'THE_PERIOD_EDIT_PINK_LUXURY_V5';
+    const STORAGE_KEY = 'THE_PERIOD_EDIT_PINK_LUXURY_V6';
 
     let state = {
       startDate: '',
@@ -558,6 +556,8 @@
         dateRange = `Days 14 - ${C}`;
       }
 
+      const nextPeriodFormatted = nextPeriod.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+
       return {
         currentDay,
         cycleLength: C,
@@ -567,7 +567,8 @@
         phaseTip,
         dateRange,
         daysUntilNext,
-        nextPeriodDate: nextPeriod.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
+        nextPeriodDateStr: nextPeriodFormatted,
+        nextPeriodShort: nextPeriod.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
         periodDateWindowStr: `${start.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} - ${end.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`
       };
     }
@@ -579,7 +580,7 @@
       document.getElementById('metricTotalCycle').innerText = `/ ${calc.cycleLength} Days`;
       document.getElementById('metricCurrentPhase').innerText = calc.phase.replace(' Phase', '');
       document.getElementById('metricCurrentPhase').style.color = calc.phaseColor;
-      document.getElementById('metricCountdown').innerText = `${calc.daysUntilNext} Days`;
+      document.getElementById('metricNextDate').innerText = calc.nextPeriodShort;
       document.getElementById('metricPeriodDates').innerText = calc.periodDateWindowStr;
 
       document.getElementById('badgePhase').innerText = calc.phase.toUpperCase();
@@ -587,7 +588,7 @@
 
       document.getElementById('ringDayText').innerText = `DAY ${calc.currentDay}`;
       document.getElementById('ringPhaseText').innerText = calc.phase;
-      document.getElementById('ringForecastText').innerText = `Next: ${calc.nextPeriodDate}`;
+      document.getElementById('ringForecastText').innerText = `Next: ${calc.nextPeriodDateStr}`;
 
       document.getElementById('phaseDateRange').innerText = calc.dateRange;
       document.getElementById('phaseTitleHeadline').innerText = `${calc.phase} Ritual`;
